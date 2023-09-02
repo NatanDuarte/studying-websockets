@@ -1,3 +1,7 @@
 const socket = io();
 
-console.assert(socket !== null);
+const textEditor = document.querySelector('#text-editor');
+
+textEditor.addEventListener('keyup', () => {
+    socket.emit("text_editor", textEditor.value);
+});
