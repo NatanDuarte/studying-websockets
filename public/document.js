@@ -1,7 +1,15 @@
-const socket = io();
+import { emit } from "./socketAdapter.js";
 
 const textEditor = document.querySelector('#text-editor');
 
-textEditor.addEventListener('keyup', () => {
-    socket.emit("text_editor", textEditor.value);
-});
+if (textEditor) {
+    textEditor.addEventListener('keyup', () => {
+        emit(textEditor.value);
+    });
+}
+
+function updateContent(content) {
+    textEditor.value = content;
+}
+
+export { updateContent };

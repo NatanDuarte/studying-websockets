@@ -5,10 +5,11 @@ function setupSocket(server) {
 
     io.on('connection', (socket) => {
         console.log(`a user connected ${socket.id}`);
-        
+
         socket.on('text_editor', (content) => {
-            console.log(content);
+            socket.broadcast.emit('text_for_clients', content);
         });
+
     });
 
     return io;
