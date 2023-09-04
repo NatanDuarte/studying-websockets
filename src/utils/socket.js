@@ -6,10 +6,13 @@ function setupSocket(server) {
     io.on('connection', (socket) => {
         console.log(`a user connected ${socket.id}`);
 
-        socket.on('text_editor', (content) => {
-            socket.broadcast.emit('text_for_clients', content);
+        socket.on('document_selected', (documentName) => {
+            socket.join(documentName);
         });
 
+        socket.on('text_editor', ({ content, documentName }) => {
+            socket.to(documentName).emit('text_for_clients', content);
+        });
     });
 
     return io;

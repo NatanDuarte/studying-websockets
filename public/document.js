@@ -1,10 +1,18 @@
-import { emit } from "./socketAdapter.js";
+import { emit, selectDocument } from "./socketAdapter.js";
+
+const parameters = new URLSearchParams(window.location.search);
+const documentName = parameters.get("name");
 
 const textEditor = document.querySelector('#text-editor');
+const documentTitle = document.querySelector('#document-title');
+
+documentTitle.textContent = documentName || "Untitled document";
+
+selectDocument(documentName);
 
 if (textEditor) {
     textEditor.addEventListener('keyup', () => {
-        emit(textEditor.value);
+        emit({ text: textEditor.value, documentName: documentName });
     });
 }
 
