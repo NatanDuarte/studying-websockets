@@ -12,7 +12,7 @@ selectDocument(documentName);
 
 if (textEditor) {
     textEditor.addEventListener('keyup', () => {
-        emit({ text: textEditor.value, documentName: documentName });
+        emit({ content: textEditor.value, documentName: documentName });
     });
 }
 

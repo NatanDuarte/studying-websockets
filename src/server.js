@@ -7,7 +7,7 @@ const setupSocket = require('./utils/socket');
 
 const app = express();
 const server = http.createServer(app);
-const io = setupSocket(server);
+setupSocket(server);
 
 app.use(express.static('public'));
 
